@@ -1,5 +1,5 @@
 # Start from a Go base image
-FROM golang:1.23
+FROM golang:1.23-alpine
 
 WORKDIR /app
 
