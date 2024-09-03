@@ -26,7 +26,9 @@ My initial primary objective is an SPA to keep track of workouts composed of exe
 Hosted on [Docker Hub](https://hub.docker.com/r/emerconn/workout-tracker), [GitHub Container Registry](https://github.com/emerconn/workout-tracker/pkgs/container/workout-tracker), & [Quay.io](https://quay.io/repository/emerconn/workout-tracker).
 
 ```bash
+docker pull emerconn/workout-tracker
+# or
 docker pull ghcr.io/emerconn/workout-tracker
 # or
-docker pull emerconn/workout-tracker
+docker pull quay.io/emerconn/workout-tracker
 ```
