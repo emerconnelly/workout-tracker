@@ -16,7 +16,6 @@ on:
       - backend/**
       - Dockerfile
       - .dockerignore
-      - entrypoint.sh
       - .github/workflows/container-image.yml
   release:
     types: [published]
