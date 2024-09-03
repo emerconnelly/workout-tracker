@@ -5,7 +5,7 @@ on:
     branches: ['**']
     tags: ['v*.*.*']
     paths:
-      - frontend
+      - backend/**
       - Dockerfile
       - .dockerignore
       - .github/workflows/container-image.yml
@@ -13,7 +13,7 @@ on:
     types: [opened, reopened]
     branches: [main]
     paths:
-      - frontend
+      - backend/**
       - Dockerfile
       - .dockerignore
       - entrypoint.sh
