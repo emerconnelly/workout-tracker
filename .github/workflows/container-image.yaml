@@ -8,7 +8,7 @@ on:
       - backend/**
       - Dockerfile
       - .dockerignore
-      - .github/workflows/container-image.yml
+      - .github/workflows/container-image.yaml
   pull_request:
     types: [opened, reopened]
     branches: [main]
@@ -16,7 +16,7 @@ on:
       - backend/**
       - Dockerfile
       - .dockerignore
-      - .github/workflows/container-image.yml
+      - .github/workflows/container-image.yaml
   release:
     types: [published]
 
