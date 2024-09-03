@@ -37,12 +37,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # - name: Login to Docker Hub
-      #   if: github.event_name != 'pull_request'
-      #   uses: docker/login-action@v3
-      #   with:
-      #     username: ${{ github.repository_owner }}
-      #     password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Login to Docker Hub
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v3
+        with:
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Login to GitHub Container Registry
         if: github.event_name != 'pull_request'
@@ -57,10 +57,9 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           flavor: latest=false
-          # images: |
-          #   ${{ github.repository_owner }}/${{ github.event.repository.name }}
-          #   ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}
-          images: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}
+          images: |
+            ${{ github.repository_owner }}/${{ github.event.repository.name }}
+            ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}
           tags: |
             type=raw,value=latest,enable=${{ github.event_name == 'release' }}
             type=semver,pattern={{major}}.{{minor}}.{{patch}}
