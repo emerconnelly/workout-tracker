@@ -23,6 +23,8 @@ My initial primary objective is an SPA to keep track of workouts composed of exe
 
 ## image
 
+Hosted on [ghcr.io](https://github.com/emerconn/workout-tracker/pkgs/container/workout-tracker) and [Docker Hub](https://hub.docker.com/r/emerconn/workout-tracker).
+
 ```bash
 docker pull ghcr.io/emerconn/workout-tracker
 # or
