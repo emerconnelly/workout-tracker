@@ -4,12 +4,12 @@ A workout tracking app! Wow!
 
 This is my first full-stack app, in an effort to learn more about web development, GitOps, and containeriztation principles.
 
-My firt primary objective is a website to keep track of exercises, and workouts composed of exercises.
+My initial primary objective is a website to keep track of exercises, and workouts composed of exercises.
 
 ## stack
 
 - backend
-  - Golang
+  - Go
 - frontend
   - React & Typescript
   - Vite
