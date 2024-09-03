@@ -73,6 +73,7 @@ jobs:
           images: |
             ${{ github.repository_owner }}/${{ github.event.repository.name }}
             ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}
+            quay.io/${{ github.repository_owner }}/${{ github.event.repository.name }}
           tags: |
             type=raw,value=latest,enable=${{ github.event_name == 'release' }}
             type=semver,pattern={{major}}.{{minor}}.{{patch}}
