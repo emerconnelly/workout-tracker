@@ -1,0 +1,27 @@
+name: Docker Hub Description
+
+on:
+  workflow_dispatch:
+  push:
+   branches: [main]
+   paths:
+     - README.md
+     - .github/workflows/docker-hub-description.yaml
+
+jobs:
+  docker-hub-description:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Modify README for Docker Hub
+        run: sed -i 's/# k8s-cronjob-smb-export/# [k8s-cronjob-smb-export](https:\/\/github.com\/emerconn\/workout-tracker)/' README.md
+
+      - name: Docker Hub Description
+        uses: peter-evans/dockerhub-description@v4
+        with:
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          repository: ${{ github.repository_owner }}/${{ github.event.repository.name }}
+          short-description: ${{ github.event.repository.description }}
