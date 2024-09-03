@@ -20,6 +20,9 @@ on:
   release:
     types: [published]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+
 jobs:
   build-and-publish:
     runs-on: ubuntu-latest
@@ -73,6 +76,8 @@ jobs:
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
+        with:
+          platforms: amd64,arm64
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
