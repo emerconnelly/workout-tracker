@@ -40,11 +40,12 @@ func main() {
 	}
 	defer client.Disconnect(context.TODO()) // Close the MongoDB connection when the main function returns
 
-	// Set up the routes and start the server
+	// Set up the routes
 	mux := setupRoutes(client)
 
 	// Add CORS middleware
 	handler := corsMiddleware(mux)
 
+	// Start the server
 	log.Fatal(http.ListenAndServe("localhost:"+port, handler))
 }
