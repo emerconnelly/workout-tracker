@@ -21,7 +21,7 @@ My initial primary objective is an SPA to keep track of workouts composed of exe
 - host
   - TBD
 
-## container image
+## image
 
 ```bash
 docker pull ghcr.io/emerconn/workout-tracker
