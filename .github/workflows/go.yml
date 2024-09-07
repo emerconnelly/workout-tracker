@@ -1,7 +1,7 @@
 name: Go
 
 on:
-  workflow_dispatach:
+  workflow_dispatch:
   push:
     paths:
     - 'backend/**'
