@@ -4,20 +4,20 @@ on:
   workflow_dispatch:
   push:
     branches: ['**']
-    tags: ['v*.*.*']
+    tags: ['**']
     paths:
-      - backend/**
-      - Dockerfile
-      - .dockerignore
-      - .github/workflows/container-image.yaml
+      - 'backend/**'
+      - 'Dockerfile'
+      - '.dockerignore'
+      - '.github/workflows/container-image.yaml'
   pull_request:
     types: [opened, reopened]
     branches: [main]
     paths:
-      - backend/**
-      - Dockerfile
-      - .dockerignore
-      - .github/workflows/container-image.yaml
+      - 'backend/**'
+      - 'Dockerfile'
+      - '.dockerignore'
+      - '.github/workflows/container-image.yaml'
   release:
     types: [published]
 
