@@ -12,13 +12,14 @@ import (
 )
 
 func main() {
-	log.Println("Yo, we live")
+	log.Println("yo, we live")
 
-	// Load the .env file if not in production
-	if os.Getenv("ENV") != "production" {
+	// Load the local .env file if not in a container
+	if os.Getenv("IS_CONTAINER") != "true" {
 		if err := godotenv.Load("../.env"); err != nil {
 			log.Fatalln(err)
 		}
+		log.Print("loaded env vars from '.env' file")
 	}
 
 	// Get the MongoDB URI and port from the environment variables
@@ -37,7 +38,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	} else {
-		log.Println("Connected to MongoDB")
+		log.Println("connected to MongoDB")
 	}
 	defer client.Disconnect(context.TODO()) // Close the MongoDB connection when the main function returns
 

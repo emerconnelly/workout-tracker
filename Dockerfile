@@ -15,4 +15,5 @@ COPY --from=builder /app/main .
 RUN chown api:api /app/main
 USER api
 EXPOSE 8080
+ENV IS_CONTAINER=true
 CMD ["./main"]
