@@ -49,6 +49,8 @@ func (h *ExerciseHandler) ListExercises(w http.ResponseWriter, r *http.Request) 
 }
 
 func (h *ExerciseHandler) GetExercise(w http.ResponseWriter, r *http.Request) {
+	log.Println("GetExercise: called")
+
 	// Get the id from the URLs
 	id := r.PathValue("id")
 	if id == "" {
@@ -79,6 +81,8 @@ func (h *ExerciseHandler) GetExercise(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *ExerciseHandler) CreateExercise(w http.ResponseWriter, r *http.Request) {
+	log.Println("CreateExercise: called")
+
 	// Decode the JSON body into an Exercise struct
 	exercise := new(models.Exercise)
 	if err := json.NewDecoder(r.Body).Decode(&exercise); err != nil {
@@ -115,6 +119,8 @@ func (h *ExerciseHandler) CreateExercise(w http.ResponseWriter, r *http.Request)
 }
 
 func (h *ExerciseHandler) UpdateExercise(w http.ResponseWriter, r *http.Request) {
+	log.Println("UpdateExercise: called")
+
 	// Get the id from the URLs
 	id := r.PathValue("id")
 	if id == "" {
@@ -162,6 +168,8 @@ func (h *ExerciseHandler) UpdateExercise(w http.ResponseWriter, r *http.Request)
 }
 
 func (h *ExerciseHandler) DeleteExercise(w http.ResponseWriter, r *http.Request) {
+	log.Println("DeleteExercise: called")
+
 	// Get the id from the URLs
 	id := r.PathValue("id")
 	if id == "" {
@@ -192,6 +200,8 @@ func (h *ExerciseHandler) DeleteExercise(w http.ResponseWriter, r *http.Request)
 }
 
 func (h *ExerciseHandler) DeleteExercises(w http.ResponseWriter, r *http.Request) {
+	log.Println("DeleteExercises: called")
+
 	// Delete all documents in the MongoDB collection
 	result, err := h.Collection.DeleteMany(context.TODO(), bson.M{})
 	if err != nil {
