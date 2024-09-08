@@ -17,7 +17,7 @@ func main() {
 	// Load the .env file if not in production
 	if os.Getenv("ENV") != "production" {
 		if err := godotenv.Load("../.env"); err != nil {
-			log.Fatal(err)
+			log.Fatalln(err)
 		}
 	}
 
@@ -26,10 +26,10 @@ func main() {
 	port := os.Getenv("PORT")
 	switch {
 	case uri == "":
-		log.Fatal("MONGODB_URI not set")
+		log.Fatalln("MONGODB_URI not set")
 	case port == "":
 		port = "8080"
-		log.Print("PORT not set, defaulting to 8080")
+		log.Println("PORT not set, defaulting to 8080")
 	}
 
 	// Connect to MongoDB
@@ -48,5 +48,5 @@ func main() {
 	handler := corsMiddleware(mux)
 
 	// Start the server
-	log.Fatal(http.ListenAndServe("localhost:"+port, handler))
+	log.Fatalln(http.ListenAndServe("localhost:"+port, handler))
 }
