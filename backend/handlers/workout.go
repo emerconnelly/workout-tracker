@@ -1,8 +1,8 @@
 package handlers
 
 import (
-	"context"
 	"encoding/json"
+	"log"
 	"net/http"
 
 	"github.com/emerconnelly/workout-tracker/models"
@@ -16,17 +16,19 @@ type WorkoutHandler struct {
 }
 
 func (h *WorkoutHandler) ListWorkouts(w http.ResponseWriter, r *http.Request) {
+	log.Println("ListWorkouts: called")
+
 	// Find all documents in the MongoDB collection
 	var workouts []models.Workout
-	cursor, err := h.Collection.Find(context.TODO(), bson.M{})
+	cursor, err := h.Collection.Find(ctx, bson.M{})
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	defer cursor.Close(context.TODO()) // Close the cursor when the function returns
+	defer cursor.Close(ctx) // Close the cursor when the function returns
 
 	// Decode each document into a Workout struct and append it to the Workouts struct slice
-	for cursor.Next(context.TODO()) {
+	for cursor.Next(ctx) {
 		var workout models.Workout
 		if err := cursor.Decode(&workout); err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -44,6 +46,8 @@ func (h *WorkoutHandler) ListWorkouts(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *WorkoutHandler) CreateWorkout(w http.ResponseWriter, r *http.Request) {
+	log.Println("CreateWorkout: called")
+
 	// Decode the request body into a Workout struct
 	var workout models.Workout
 	if err := json.NewDecoder(r.Body).Decode(&workout); err != nil {
@@ -59,7 +63,7 @@ func (h *WorkoutHandler) CreateWorkout(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Insert the Workout struct into the MongoDB collection
-	result, err := h.Collection.InsertOne(context.TODO(), workout)
+	result, err := h.Collection.InsertOne(ctx, workout)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return

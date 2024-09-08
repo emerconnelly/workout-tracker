@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"context"
 	"encoding/json"
 	"log"
 	"net/http"
@@ -21,15 +20,15 @@ func (h *ExerciseHandler) ListExercises(w http.ResponseWriter, r *http.Request) 
 
 	// Find all documents in the MongoDB collection
 	var exercises []models.Exercise
-	cursor, err := h.Collection.Find(context.TODO(), bson.M{})
+	cursor, err := h.Collection.Find(ctx, bson.M{})
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	defer cursor.Close(context.TODO()) // Close the cursor when the function returns
+	defer cursor.Close(ctx) // Close the cursor when the function returns
 
 	// Decode each document into an Exercise struct and append it to the Exercises struct slice
-	for cursor.Next(context.TODO()) {
+	for cursor.Next(ctx) {
 		var exercise models.Exercise
 		if err := cursor.Decode(&exercise); err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -67,7 +66,7 @@ func (h *ExerciseHandler) GetExercise(w http.ResponseWriter, r *http.Request) {
 
 	// Find the exercise by the ObjectID
 	var exercise models.Exercise
-	if err := h.Collection.FindOne(context.TODO(), bson.M{"_id": objectID}).Decode(&exercise); err != nil {
+	if err := h.Collection.FindOne(ctx, bson.M{"_id": objectID}).Decode(&exercise); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
@@ -101,7 +100,7 @@ func (h *ExerciseHandler) CreateExercise(w http.ResponseWriter, r *http.Request)
 	}
 
 	// Insert the Exercise struct into the MongoDB collection
-	result, err := h.Collection.InsertOne(context.TODO(), exercise)
+	result, err := h.Collection.InsertOne(ctx, exercise)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -153,7 +152,7 @@ func (h *ExerciseHandler) UpdateExercise(w http.ResponseWriter, r *http.Request)
 	}
 
 	// Update the exercise by the ObjectID
-	result, err := h.Collection.ReplaceOne(context.TODO(), bson.M{"_id": objectID}, exercise)
+	result, err := h.Collection.ReplaceOne(ctx, bson.M{"_id": objectID}, exercise)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -185,7 +184,7 @@ func (h *ExerciseHandler) DeleteExercise(w http.ResponseWriter, r *http.Request)
 	}
 
 	// Delete the exercise by the ObjectID
-	result, err := h.Collection.DeleteOne(context.TODO(), bson.M{"_id": objectID})
+	result, err := h.Collection.DeleteOne(ctx, bson.M{"_id": objectID})
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -203,7 +202,7 @@ func (h *ExerciseHandler) DeleteExercises(w http.ResponseWriter, r *http.Request
 	log.Println("DeleteExercises: called")
 
 	// Delete all documents in the MongoDB collection
-	result, err := h.Collection.DeleteMany(context.TODO(), bson.M{})
+	result, err := h.Collection.DeleteMany(ctx, bson.M{})
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
