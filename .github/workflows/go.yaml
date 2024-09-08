@@ -5,6 +5,7 @@ on:
   push:
     paths:
     - 'backend/**'
+    - '.github/workflows/go.yaml'
 
 jobs:
   build:
