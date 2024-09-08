@@ -3,7 +3,7 @@ package handlers
 import (
 	"context"
 	"encoding/json"
-	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/emerconnelly/workout-tracker/models"
@@ -17,7 +17,7 @@ type ExerciseHandler struct {
 }
 
 func (h *ExerciseHandler) ListExercises(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("ListExercises: called")
+	log.Println("ListExercises: called")
 
 	// Find all documents in the MongoDB collection
 	var exercises []models.Exercise
@@ -37,7 +37,7 @@ func (h *ExerciseHandler) ListExercises(w http.ResponseWriter, r *http.Request) 
 		}
 		exercises = append(exercises, exercise)
 	}
-	fmt.Printf("ListExercises: found %d exercises\n", len(exercises))
+	log.Printf("ListExercises: found %d exercises\n", len(exercises))
 
 	// Return the Exercises struct slice as JSON
 	w.Header().Set("Content-Type", "application/json")
@@ -45,7 +45,7 @@ func (h *ExerciseHandler) ListExercises(w http.ResponseWriter, r *http.Request) 
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	fmt.Println("ListExercises: response sent successfully")
+	log.Println("ListExercises: response sent successfully")
 }
 
 func (h *ExerciseHandler) GetExercise(w http.ResponseWriter, r *http.Request) {
