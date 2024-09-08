@@ -26,9 +26,10 @@ func main() {
 	port := os.Getenv("PORT")
 	switch {
 	case uri == "":
-		log.Fatal("MONGODB_URI is empty")
+		log.Fatal("MONGODB_URI not set")
 	case port == "":
-		log.Fatal("PORT is empty")
+		port = "8080"
+		log.Print("PORT not set, defaulting to 8080")
 	}
 
 	// Connect to MongoDB
