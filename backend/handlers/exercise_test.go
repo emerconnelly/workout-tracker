@@ -54,3 +54,10 @@ func TestListExercises(t *testing.T) {
 	}
 	t.Log("exercises match the test data")
 }
+
+func TestGetExercise(t *testing.T) {
+	// Create and execute the HTTP request
+	req, _ := http.NewRequest("GET", "/api/exercise/{id}", nil)
+	rr := httptest.NewRecorder()
+	http.HandlerFunc(exerciseHandler.ListExercises).ServeHTTP(rr, req)
+}

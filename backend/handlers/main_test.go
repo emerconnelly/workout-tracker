@@ -30,7 +30,6 @@ func TestMain(m *testing.M) {
 	log.Println("TestMain: called")
 
 	// Start a new MongoDB container
-	log.Println("TestMain: starting MongoDB container")
 	container, err := mongodb.Run(ctx, "mongo:7")
 	if err != nil {
 		log.Fatal("TestMain: failed to start MongoDB container:", err)
