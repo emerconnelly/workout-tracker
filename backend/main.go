@@ -11,6 +11,8 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
+var ctx = context.Background()
+
 func main() {
 	log.Println("yo, we live")
 
@@ -34,13 +36,13 @@ func main() {
 	}
 
 	// Connect to MongoDB
-	client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(uri))
+	client, err := mongo.Connect(ctx, options.Client().ApplyURI(uri))
 	if err != nil {
 		panic(err)
 	} else {
 		log.Println("connected to MongoDB")
 	}
-	defer client.Disconnect(context.TODO()) // Close the MongoDB connection when the main function returns
+	defer client.Disconnect(ctx) // Close the MongoDB connection when the main function returns
 
 	// Set up the routes
 	mux := setupRoutes(client)
