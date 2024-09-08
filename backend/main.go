@@ -12,7 +12,7 @@ import (
 )
 
 func main() {
-	log.Println("Hello, World!")
+	log.Println("Yo, we live")
 
 	// Load the .env file if not in production
 	if os.Getenv("ENV") != "production" {
