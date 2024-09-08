@@ -12,7 +12,7 @@ FROM alpine:3.20
 WORKDIR /app
 RUN adduser -D api
 COPY --from=builder /app/main .
-RUN chown api:api/app/main
+RUN chown api:api /app/main
 USER api
 EXPOSE 8080
 CMD ["./main"]
