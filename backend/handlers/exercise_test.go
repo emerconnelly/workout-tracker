@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"context"
 	"encoding/json"
 	"io"
 	"net/http"
@@ -9,58 +8,11 @@ import (
 	"testing"
 
 	"github.com/emerconnelly/workout-tracker/models"
-	"github.com/testcontainers/testcontainers-go/modules/mongodb"
-	"go.mongodb.org/mongo-driver/mongo"
-	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 func TestListExercises(t *testing.T) {
-	ctx := context.Background()
-
-	// Start a new MongoDB container
-	mongodbContainer, err := mongodb.Run(ctx, "mongo:7")
-	if err != nil {
-		t.Fatal("failed to start MongoDB container:", err)
-	}
-
-	// Ensure the container is terminated when the test finishes
-	defer func() {
-		if err := mongodbContainer.Terminate(ctx); err != nil {
-			t.Fatal("failed to terminate MongoDB container:", err)
-		}
-	}()
-
-	// Connect to the MongoDB container
-	mongoEndpoint, err := mongodbContainer.ConnectionString(ctx)
-	if err != nil {
-		t.Fatal("failed to get MonogoDB connection string:", err)
-	}
-	mongoClient, err := mongo.Connect(ctx, options.Client().ApplyURI(mongoEndpoint))
-	if err != nil {
-		t.Fatal("failed to connect to MongoDB:", err)
-	}
-
-	// Create a new MongoDB collection
-	collection := mongoClient.Database("test").Collection("exercises")
-
-	// Insert test data
-	testExercises := []interface{}{
-		models.Exercise{Name: "Push-ups", MuscleGroup: "Chest"},
-		models.Exercise{Name: "Squats", MuscleGroup: "Legs"},
-	}
-	_, err = collection.InsertMany(ctx, testExercises)
-	if err != nil {
-		t.Fatal("failed to insert test data in MongoDB collection:", err)
-	}
-	t.Log("inserted test data into MongoDB collection")
-
-	/// Create an instance of ExerciseHandler
-	exerciseHandler := &ExerciseHandler{
-		Collection: collection,
-	}
-
 	// Create and execute the HTTP request
-	req, _ := http.NewRequest("GET", "/exercises", nil)
+	req, _ := http.NewRequest("GET", "/api/exercises", nil)
 	rr := httptest.NewRecorder()
 	http.HandlerFunc(exerciseHandler.ListExercises).ServeHTTP(rr, req)
 
@@ -85,10 +37,10 @@ func TestListExercises(t *testing.T) {
 	}
 
 	// Check the number of exercises returned
-	if len(exercises) != 2 {
+	if len(exercises) != len(testExercises) {
 		t.Errorf("expected %d exercises, got %d", len(testExercises), len(exercises))
 	}
-	t.Log("expected 2 exercises, got", len(exercises))
+	t.Logf("expected %d exercises, got %d", len(testExercises), len(exercises))
 
 	// Check the content of the exercises
 	for i, exercise := range exercises {
