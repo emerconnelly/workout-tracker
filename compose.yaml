@@ -1,6 +1,6 @@
 services:
   backend:
-    image: emerconnelly/workout-tracker
+    image: ghcr.io/emerconnelly/workout-tracker:main
     env_file: ".env"
     ports:
       - "8080:8080"
