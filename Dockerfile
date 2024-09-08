@@ -10,7 +10,7 @@ RUN upx --best --lzma main
 # Run stage
 FROM alpine:3.20
 WORKDIR /app
-RUN adduser -D api
+RUN adduser -D -H -s /sbin/nologin api
 COPY --from=builder /app/main .
 RUN chown api:api /app/main
 USER api
