@@ -67,7 +67,7 @@ func TestListExercises(t *testing.T) {
 func TestGetExercise(t *testing.T) {
 	for _, testExerciseInterface := range testExercises {
 		testExercise := testExerciseInterface.(*models.Exercise)
-		t.Logf("testing exercise '%v' with '%v'", testExercise.Name, testExercise.ID)
+		t.Logf("testing exercise '%v' with %v", testExercise.Name, testExercise.ID)
 
 		// Create and execute the HTTP request
 		req, _ := http.NewRequest("GET", "/api/exercise/"+testExercise.ID.Hex()+"/", nil)
@@ -85,10 +85,12 @@ func TestGetExercise(t *testing.T) {
 		}
 
 		// Read the response body
-		t.Logf("response body: %v", rr.Body)
+		// t.Logf("response body: %v", rr.Body)
 		body, err := io.ReadAll(rr.Body)
 		if err != nil {
 			t.Errorf("failed to read response body: %e", err)
+		} else {
+			t.Logf("response body read")
 		}
 
 		// Parse the response body
@@ -96,7 +98,7 @@ func TestGetExercise(t *testing.T) {
 		if err := json.Unmarshal(body, &responseExercise); err != nil {
 			t.Errorf("failed to unmarshal response body: %e", err)
 		} else {
-			t.Logf("response body unmarshalled: %v", responseExercise)
+			t.Logf("response body unmarshalled")
 		}
 
 		// Check the content of the exercise
