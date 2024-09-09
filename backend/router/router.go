@@ -1,4 +1,4 @@
-package main
+package router
 
 import (
 	"net/http"
@@ -7,7 +7,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-func setupRoutes(client *mongo.Client) *http.ServeMux {
+func SetupRoutes(client *mongo.Client) *http.ServeMux {
 	// Exercise handler
 	exerciseCollection := client.Database("workout_tracker").Collection("exercises")
 	exerciseHandler := &handlers.ExerciseHandler{Collection: exerciseCollection}

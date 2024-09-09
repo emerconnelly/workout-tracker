@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/emerconnelly/workout-tracker/router"
 	"github.com/joho/godotenv"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -45,7 +46,7 @@ func main() {
 	defer client.Disconnect(ctx) // Close the MongoDB connection when the main function returns
 
 	// Set up the routes
-	mux := setupRoutes(client)
+	mux := router.SetupRoutes(client)
 
 	// Add CORS middleware
 	handler := corsMiddleware(mux)
