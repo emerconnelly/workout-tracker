@@ -2,9 +2,9 @@
 
 A workout tracking app! Wow!
 
-This is my first full-stack app, in an effort to learn more about web development, GitOps, and containeriztation principles.
+This is my first full-stack app, in an effort to learn more about web dev, containers, & GitOps.
 
-My initial primary objective is an SPA to keep track of workouts composed of exercises.
+The initial primary objective is an SPA to keep track of workouts composed of exercises.
 
 ## stack
 
