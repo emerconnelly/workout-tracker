@@ -15,7 +15,7 @@ The initial primary objective is a web SPA to keep track of workouts composed of
   - MUI library
   - _why is frontend so miserable_
 - database: MongoDB (Atlas)
-- build: GitHub Actions
+- ci: GitHub Actions
 - host: TBD
 
 ## image
