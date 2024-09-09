@@ -44,7 +44,7 @@ func (h *ExerciseHandler) ListExercises(w http.ResponseWriter, r *http.Request) 
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	log.Println("ListExercises: response sent successfully")
+	log.Println("ListExercises: response sent")
 }
 
 func (h *ExerciseHandler) GetExercise(w http.ResponseWriter, r *http.Request) {
@@ -53,7 +53,7 @@ func (h *ExerciseHandler) GetExercise(w http.ResponseWriter, r *http.Request) {
 	// Get the id from the URLs
 	id := r.PathValue("id")
 	if id == "" {
-		http.Error(w, "id is required", http.StatusBadRequest)
+		http.Error(w, "id required", http.StatusBadRequest)
 		return
 	}
 
