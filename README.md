@@ -8,18 +8,14 @@ The initial primary objective is an SPA to keep track of workouts composed of ex
 
 ## stack
 
-- backend
-  - Go
+- backend: Go
 - frontend
   - React & Typescript
   - Vite
   - MUI component library
-- database
-  - MongoDB (free Atlas version)
-- build
-  - GitHub Actions
-- host
-  - TBD
+- database: MongoDB (free Atlas version)
+- build: GitHub Actions
+- host: TBD
 
 ## image
 
