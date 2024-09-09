@@ -63,6 +63,7 @@ func (h *ExerciseHandler) GetExercise(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
+	log.Printf("GetExercise: using %s", objectID)
 
 	// Find the exercise by the ObjectID
 	var exercise models.Exercise
@@ -70,6 +71,7 @@ func (h *ExerciseHandler) GetExercise(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+	log.Printf("GetExercise: found exercise '%s'", exercise.Name)
 
 	// Return the exercise as JSON
 	w.Header().Set("Content-Type", "application/json")
@@ -77,6 +79,7 @@ func (h *ExerciseHandler) GetExercise(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+	log.Printf("GetExercise: response sent")
 }
 
 func (h *ExerciseHandler) CreateExercise(w http.ResponseWriter, r *http.Request) {
