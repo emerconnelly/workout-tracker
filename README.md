@@ -10,10 +10,11 @@ The initial primary objective is an SPA to keep track of workouts composed of ex
 
 - backend: Go
 - frontend
-  - React & Typescript
-  - Vite
-  - MUI component library
-- database: MongoDB (free Atlas version)
+  - React using Typescript
+  - Vite builder
+  - MUI library
+  - _why is frontend so miserable_
+- database: MongoDB (Atlas)
 - build: GitHub Actions
 - host: TBD
 
