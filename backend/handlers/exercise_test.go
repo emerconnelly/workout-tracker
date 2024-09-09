@@ -12,9 +12,11 @@ import (
 
 func TestListExercises(t *testing.T) {
 	// Create and execute the HTTP request
-	req, _ := http.NewRequest("GET", "/api/exercises", nil)
+	req, _ := http.NewRequest("GET", "/api/exercises/", nil)
 	rr := httptest.NewRecorder()
-	http.HandlerFunc(exerciseHandler.ListExercises).ServeHTTP(rr, req)
+	mux := http.NewServeMux()
+	mux.HandleFunc("/api/exercises/", exerciseHandler.ListExercises)
+	mux.ServeHTTP(rr, req)
 
 	// Check the response code
 	code := rr.Code
