@@ -6,7 +6,7 @@ This is my first full-stack app, in an effort to learn more about web dev, conta
 
 The initial primary objective is a web SPA to keep track of workouts composed of exercises.
 
-## stack
+## tech stack
 
 - backend: Go
 - frontend
