@@ -33,11 +33,7 @@ jobs:
       packages: write
     strategy:
       matrix:
-        include:
-        - target: main
-          suffix: ''
-        - target: debug
-          suffix: '-debug'
+        target: [main, debug]
     outputs:
         tags: ${{ steps.matrix.outputs.tags }}
 
@@ -80,11 +76,11 @@ jobs:
           ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}
           quay.io/${{ github.repository_owner }}/${{ github.event.repository.name }}
         tags: |
-          type=raw,value=latest${{ matrix.suffix }},enable=${{ github.event_name == 'release' }}
-          type=semver,pattern={{major}}.{{minor}}.{{patch}}${{ matrix.suffix }}
-          type=semver,pattern={{major}}.{{minor}}${{ matrix.suffix }}
-          type=semver,pattern={{major}}${{ matrix.suffix }}
-          type=ref,event=branch,suffix=${{ matrix.suffix }}
+          type=raw,value=${{ matrix.target == 'main' && 'latest' || 'debug' }},enable=${{ github.event_name == 'release' }}
+          type=semver,pattern={{major}}.{{minor}}.{{patch}}${{ matrix.target == 'debug' && '-debug' || '' }}
+          type=semver,pattern={{major}}.{{minor}}${{ matrix.target == 'debug' && '-debug' || '' }}
+          type=semver,pattern={{major}}${{ matrix.target == 'debug' && '-debug' || '' }}
+          type=ref,event=branch,suffix=${{ matrix.target == 'debug' && '-debug' || '' }}
     - name: Matrix tags
       id: matrix
       run: |
