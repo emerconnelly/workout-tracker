@@ -10,10 +10,10 @@ RUN upx --best --lzma main
 # Run stage
 FROM alpine:3.20
 WORKDIR /app
-RUN adduser -D -H -s /sbin/nologin api
+RUN addgroup -g 65532 nonroot && adduser -DHs /sbin/nologin -u 65532 -G nonroot nonroot
 COPY --from=builder /app/main .
-RUN chown api:api /app/main
-USER api
+RUN chown nonroot:nonroot /app/main
+USER nonroot:nonroot
 EXPOSE 8080
 ENV IS_CONTAINER=true
 CMD ["./main"]
