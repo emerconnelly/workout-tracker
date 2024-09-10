@@ -19,7 +19,7 @@ ENV IS_CONTAINER=true
 CMD ["./main"]
 
 # Production image
-FROM gcr.io/distroless/static-debian12 AS main
+FROM gcr.io/distroless/static-debian12 AS slim
 WORKDIR /app
 COPY --from=build /app/main .
 USER nonroot:nonroot
