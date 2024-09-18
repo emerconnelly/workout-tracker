@@ -1,8 +1,6 @@
 # workout-tracker
 
-A workout tracking app! Wow!
-
-This is my first full-stack app, in an effort to learn more about web dev, containers, & GitOps.
+A workout tracking app.
 
 The initial objective is a simple and ugly web SPA to keep track of workouts composed of exercises.
 
